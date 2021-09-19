@@ -1,0 +1,117 @@
+.modal {
+    min-width: 100%;
+    min-height: 100%;
+    display: visible;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  .modal_content {
+    min-width: "50%";
+    height: "fit-content";
+    background-color: white;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    top: 15%;
+    bottom: 25%;
+  }
+  .popup_test {
+    height: 60%;
+    background-color: rgb(15, 39, 175);
+    position: absolute;
+    left: 103%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
+    z-index: 1;
+  }
+  .popup_1 {
+    background-color: rgb(15, 39, 175);
+    min-width: 50%;
+  }
+  .popup_2 {
+    background-color: rgb(15, 175, 36);
+    min-width: 40%;
+  }
+  .popup_3 {
+    background-color: rgb(175, 132, 15);
+    min-width: 30%;
+  }
+
+  .each_list_bounding_box {
+      margin-bottom: 8%
+  }
+
+  .each_list_buttons {
+    display: inline-block;
+    float: left;    
+    margin-left: 20px;
+}
+
+  .input_text {
+      width: 30%;
+      height: 15px;
+      margin: 1% 5% 
+  }
+  .input_date {
+    width: 15%;
+    height: 15px;
+    margin: 1% 5%     
+}
+
+.input_text_short {
+  width: 8%;
+  height: 12px;
+  margin: 1% 5% 
+}
+
+.float_right {
+  float: right;
+  margin-right: 10%
+}
+
+.date_checkboxes {
+  margin-right: 5%
+}
+
+.more_button {
+  min-width: 60px;
+  font-size: 10px;
+  background-color: none;
+  color: blue;
+  border: none;
+}
+.add_button {
+  min-width: 60px;
+  font-size: 12px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 5px;
+}
+.remove_button {
+  min-width: 60px;
+  font-size: 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 5px;
+}
+
+.save_button {
+  min-width: 60px;
+  font-size: 12px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+  float: left;
+  margin: 20px;
+}

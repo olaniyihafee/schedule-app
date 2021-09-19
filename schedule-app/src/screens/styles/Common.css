@@ -1,0 +1,80 @@
+.Entire-Body {
+  margin: 20px;
+  width: 100%;
+}
+
+li{
+  list-style: none;
+}
+.Link-Style {
+  text-decoration: none;
+  color: inherit;
+}
+
+.Heading-Container {    
+  width: 100%;
+  padding-bottom: 0px;
+  /* background-color: brown; */
+}
+
+.h1 {    
+  font-size: 25px;
+  font-weight: 400;
+  margin-bottom:  0px;
+}
+
+.h2 {    
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.Button{
+  margin: 0px 20px;
+  width: 120px;
+  height: 35px;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 0px;
+}
+.Button-Blue {
+  color: white;
+  background-color: blue;
+  border-radius: 20px;
+  display: inline-block;  
+  margin-bottom: 0px;
+}
+.Button-Normal {
+  background-color: transparent;
+  display: inline-block;
+}
+
+.Float-Right {
+  float: right;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom:  0px;
+}
+.Inline {
+  display: inline-block;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom:  0px;
+}
+
+.Subtittles-Container {
+  width: 100%;
+  /* background-color: rgb(255, 217, 0); */
+  padding: 10px 0px 0px;
+}
+
+.Project-Tittle-Add-Task-Container {
+  width: 40%;
+  height: 35px;
+  /* background-color: aqua; */
+  margin-bottom:  0px;
+}

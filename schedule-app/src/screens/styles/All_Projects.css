@@ -1,0 +1,26 @@
+
+  .Horizontal-Line {
+    width: 100%;
+  }
+  .Project-Tittles-Container {
+    width: 70%;
+    margin:auto;
+    padding: auto 10px;
+  }
+
+  .Each-Project-Tittle {
+    width: 90%;
+    height: 40px;
+    margin: 5px auto;
+    border: solid 2px black ;
+    border-radius: 4px;
+    padding: auto 5px;
+  }
+
+  .Progress_bar{
+    float: right;
+    margin-right: '30px';
+  }
+
+  
+  

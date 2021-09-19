@@ -1,0 +1,195 @@
+
+.Table-Entire-Container { 
+    width: 100%;
+    display:  flex;
+    direction: column;
+    padding: auto;
+    margin-top: 20px;
+    /* background-color:lightseagreen; */
+  } 
+  .Horizontal-Line{
+    color: black;
+  }
+
+  .MDW-H-Line{
+    background-color: grey;
+    opacity: 0.8;
+  }
+
+  .LWW-H-Line{
+    background-color: grey;
+    opacity: 0.5;
+  }
+
+  .Table-Right-Container {
+    width: 60%;
+    height:fit-content;
+    overflow-x: scroll;
+    margin: 5px;
+    /* background-color: lawngreen; */
+    background: transparent;
+  }
+  .Table-Right-Sub-Container {
+    width: fit-content;
+    height:fit-content;
+    margin: 5px;
+    /* background-color: lawngreen; */
+  }
+
+  .Table-Left-Container {
+    width: 40%;
+    height:fit-content;
+    margin: 5px;
+    /* background-color:lightcoral; */
+  }
+  
+  .Table-Content { 
+    height: 40px;
+    margin: 5px auto;
+    /* border: solid 2px black ; */
+    border-radius: 4px;
+  }
+  .Table-Content-Test {
+    width: 1600px; 
+    height: 40px;
+    margin: 5px auto;
+    /* border: solid 2px rgb(87, 82, 82) ; */
+    border-radius: 4px;
+  }
+  .Tasks-Headings-Container {
+    width: 100%;  
+  }
+  .Tasks-Headings-Container li {
+    display: inline-block;  
+  }
+  .Tasks-Headings-ul {
+    padding-top: 0px;
+    padding-left: 0px;
+    margin-top: 3px;
+    margin-left: 0px;
+    height: 10px;
+    width: 100%;
+  }
+
+  .Main-T{
+    width: 40%; 
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .Main-S-D{
+    width: 20%; 
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .Main-D-D{
+    width: 10%; 
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .Tasks{
+    width: 40%;  
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .Start{
+    width: 20%; 
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .Due{
+    width: 20%; 
+    font-size: 12px;
+    font-weight: 500; 
+  }
+  .Days{
+    width: 10%; 
+    font-size: 12px;
+    font-weight: 500; 
+  }
+  .Percentage{
+    width: 10%; 
+    font-size: 12px;
+    font-weight: 500; 
+  }
+
+
+
+  .Tasks-Subtopic{
+    width: 38%;  
+    font-size: 12px;
+    font-weight: 450;
+    padding-left: 2%;
+  }
+  .Start-Subtopic{
+    width: 20%; 
+    font-size: 12px;
+    font-weight: 450;
+  }
+  .Due-Subtopic{
+    width: 20%; 
+    font-size: 12px;
+    font-weight: 450; 
+  }
+  .Days-Subtopic{
+    width: 10%; 
+    font-size: 12px;
+    font-weight: 450; 
+  }
+  .Percentage-Subtopic{
+    width: 10%; 
+    font-size: 12px;
+    font-weight: 450; 
+  }
+
+
+  .Weeks-Headings-Container {
+    width: 77px;
+    height: 1000px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    align-content: center;/* 
+    background-color: blue; */
+    border: 1px solid rgba(65, 64, 64, 0.034); 
+    
+  }
+  .Weeks-Headings-Container span{
+    width: 210px;
+    text-align: center;
+  }
+  .Weeks-Headings-Container li {
+    width: 11px;
+    height: 1400px;
+    font-size: 8px;
+    display: inline-block;
+  }
+
+  .W-H-C-SunAndSat {
+    width: 11px;
+    height: 1400px;
+    font-size: 10px;
+    background-color: rgba(109, 106, 106, 0.171);
+    display: inline-block;
+    z-index: -5;
+  }
+  .All-Dates{
+    width: 10000px;
+    height: 35px;
+    margin-top: 0px;
+    padding-top: 0px;
+    /* background-color: blue;  */
+  }
+  .Each-Date {
+    width: 77px;
+    text-align: center;
+    height: 14px;
+    font-size: 9px;
+    
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+
+  .All_T_R_Row {
+    margin-top: 4px;
+  }
