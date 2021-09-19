@@ -24,6 +24,10 @@ const sortProjects = async (data) => {
     const validProjectsWithTasks = validateTasks(validProjects)
     const validProjectsWithTasksAndDays = sortDaysOfTheWeek(validProjectsWithTasks)
     const validProjectsWithTasksAndDaysAndTimeOfDay = sortTimeOfTheDay(validProjectsWithTasksAndDays)
+    reorderTheTimeInAsendingOrder(validProjectsWithTasksAndDays)
+    sortForFreeTime(validProjectsWithTasksAndDays)
+    createAndAddAllProjects(validProjectsWithTasksAndDays)
+    creatAndAddAllFreeTime(validProjectsWithTasksAndDays)
 
     return validProjectsWithTasksAndDaysAndTimeOfDay
 
