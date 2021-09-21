@@ -1,12 +1,12 @@
 import { TabRouter } from '@react-navigation/routers';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import { UserContext } from '../otherFunctions/userContext'
 import Task from './task'
 
 const Day = ({ navigation, route }) => {
-  
+  const windowHeight = Dimensions.get('window').height; //function to collect screen height for Flatlist easy scroll  
   const { day } = route.params
     //const value = useContext(UserContext)
 
@@ -35,6 +35,7 @@ const Day = ({ navigation, route }) => {
       <View>
         <View style={{flex: 1}}>                
           <FlatList 
+            style={{maxHeight: windowHeight}}
             data={day}
             keyExtractor={(item, index) => index.toString()}
             renderItem={ItemView}

@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { AsyncStorage, ActivityIndicator, StyleSheet, Text, View, Button } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -13,27 +13,83 @@ const Drawer = createDrawerNavigator();
 
 const App = () => {
   const [projects, setProjects] = useState([]);
+  const [animating, setAnimating] = useState(true);
   var jumong = 'MainNavRoutes'
-  let placeholder = []
+  var read = []
 
   useEffect(async () =>{
-    var read = await sortedProjects()
-      setProjects(read)
-      placeholder = read
-    console.log('mon: '+JSON.stringify(placeholder[1].projectname))        
-  },placeholder)
+   /*  const arraying = [ [7,2,3], [4,3,5,6], [0,1,9],[0,5,8] ]
+    const newArray = []
+    const newArrayForLarge = []
+
+    arraying.forEach((array, index)=> {
+      newArray.push(array[0])
+    })    
+    console.log('newArray:' +newArray)
+    
+    newArray.sort((a,b)=> a-b)   
+    console.log('newArray after sorting:' +newArray)
+
+    arraying.forEach((array, index)=> {
+      newArrayForLarge[newArray.indexOf(array[0])] = array
+    })    
+    console.log('newArrayForLarge:' +newArrayForLarge) */
+
+  /*   const arraying = [ [7,2], [4,3], [8,1], [1,1],[9,5] ]
+
+    for( let x = 0; x<(arraying.length -1); x++){
+      if (arraying[x][1] !== arraying[x + 1][0]){
+        let newInsertion = [arraying[x][1] , arraying[x + 1][0]]
+        arraying.splice((x+1), 0, newInsertion)
+      }
+    }
+
+    console.log('arraying:' +arraying) */
+
+     read = await sortedProjects()
+    //var write = await AsyncStorage.getItem('projects')
+    await setProjects(read)
+      //await AsyncStorage.setItem('projects', projects)
+    console.log('mon: '+JSON.stringify(read))        
+  },()=>setProjects(read))
   return (
       
-    <NavigationContainer>
+    <NavigationContainer>     
 
       <Drawer.Navigator initialRoute='All Projects'>
-        
-        <Drawer.Screen
+         
+      {/* <ActivityIndicator
+        animating={true}
+        color="gray"
+        size="large"
+        style={styles.activityIndicator}
+      />
+ */}
+      {projects == undefined ? (
+      <Drawer.Screen
           name="All Projects"
-          component={Task}
+          component={Week}
+          initialParams={{
+                          Mon: projects[0].mon, 
+                          Tue: projects[0].tue,
+                          Wed: projects[0].wed, 
+                          Thr: projects[0].thr,
+                          Fri: projects[0].fri, 
+                          Sat: projects[0].sat,
+                          Sun: projects[0].sun
+                        }}
           // Hiding header for Navigation Drawer as we will use our custom header
           options={{headerShown: true}}
         />
+        ):
+        (
+          <Drawer.Screen
+              name="All Projects"
+              component={Task}
+              // Hiding header for Navigation Drawer as we will use our custom header
+              options={{headerShown: true}}
+            />)
+      }
 
         {projects.map((project,index) => (
           <Drawer.Screen 

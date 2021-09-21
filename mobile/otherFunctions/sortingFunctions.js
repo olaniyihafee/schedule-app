@@ -24,10 +24,10 @@ const sortProjects = async (data) => {
     const validProjectsWithTasks = validateTasks(validProjects)
     const validProjectsWithTasksAndDays = sortDaysOfTheWeek(validProjectsWithTasks)
     const validProjectsWithTasksAndDaysAndTimeOfDay = sortTimeOfTheDay(validProjectsWithTasksAndDays)
-    reorderTheTimeInAsendingOrder(validProjectsWithTasksAndDays)
-    sortForFreeTime(validProjectsWithTasksAndDays)
-    createAndAddAllProjects(validProjectsWithTasksAndDays)
-    creatAndAddAllFreeTime(validProjectsWithTasksAndDays)
+    //reorderTheTimeInAsendingOrder(validProjectsWithTasksAndDays)
+    //sortForFreeTime(validProjectsWithTasksAndDays)
+    //createAndAddAllProjects(validProjectsWithTasksAndDays)
+    //creatAndAddAllFreeTime(validProjectsWithTasksAndDays)
 
     return validProjectsWithTasksAndDaysAndTimeOfDay
 
@@ -54,7 +54,7 @@ const validateProjects = (data) =>{
         }
     }) //data.projects
 
-    //console.log('validProjects: '+[...validProjects])
+    console.log('validProjects: '+[...validProjects])
     return validProjects
 }//end of validateProjects
 
@@ -139,7 +139,7 @@ const sortDaysOfTheWeek = (validProjectsWithTasks) => {
 
         }) //end of validate project for each   
 
-        //console.log('newProjectsCollection inside sortDaysOfWeek: '+JSON.stringify(newProjectsCollection))
+        console.log('newProjectsCollection inside sortDaysOfWeek: '+JSON.stringify(newProjectsCollection))
         return newProjectsCollection
 }//end of sortDaysOfTheWeek
 
@@ -343,12 +343,16 @@ const sortTimeOfTheDay = (/* validProjectsWithTasksAndDays */jumong) => {
 
     }) //end of validate project for each   
 
-    //console.log('newProjectsCollection: '+JSON.stringify(newProjectsCollection[0])) 
+    console.log('newProjectsCollection: '+JSON.stringify(newProjectsCollection[0])) 
     //console.log('newProjectsCollection: '+JSON.stringify(newProjectsCollection[1])) 
     //console.log('newProjectsCollection: '+JSON.stringify(newProjectsCollection[2]))  
     //console.log('newProjectsCollection: '+JSON.stringify(validProjectsWithTasksAndDays[1]))
         return newProjectsCollection
 }//end of sortTimeOfTheDay
+
+const sortForFreeTime = (validProjectsWithTasksAndDays) => {
+    
+}
 /* const projects= {
     project:{
         projectname:'jumong',
