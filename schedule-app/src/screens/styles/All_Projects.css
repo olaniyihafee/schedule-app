@@ -5,7 +5,7 @@
   .Project-Tittles-Container {
     width: 70%;
     margin:auto;
-    padding: auto 10px;
+    padding: auto 10px;;
   }
 
   .Each-Project-Tittle {
@@ -15,11 +15,22 @@
     border: solid 2px black ;
     border-radius: 4px;
     padding: auto 5px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .Progress_bar{
     float: right;
     margin-right: '30px';
+  }
+
+  .trash{
+    width: 15px;
+    height: 24px;
+    background: transparent;
+    background-image: url(/src/assets/trash.png);
+    border-style: none;
+    border: none;
   }
 
   

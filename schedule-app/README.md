@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+chrome.exe --user-data-dir="C://Chrome dev session" --disable-web-security
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

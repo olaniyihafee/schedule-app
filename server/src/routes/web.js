@@ -9,7 +9,9 @@ let routes = app => {
 
     //router.get("/", projectsController.projects);
     //Schedule app custom code
-      router.get("/projects", projectsController.projects);
+      //router.get("/projects", projectsController.projects);
+      app.use(projectsController.projects);
+      app.use(update_projectsController.update_projects);
       //router.post("/update_projects", update_projectsController.update_projects);
 
   return app.use("/", router);

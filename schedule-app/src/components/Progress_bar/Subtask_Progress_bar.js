@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Subtask_Time_Bar from '../Time_Bar/Subtask_Time_Bar'
 
 
 function Subtask_Progress_bar(props) {
@@ -24,7 +25,7 @@ function Subtask_Progress_bar(props) {
 
   //
 
-  const { minimumdate, start, end} = props
+  const { minimumdate, start, end, gantView} = props
 
   const days_interval_conversion_to_pixel = (days) => {
     if (days < 0 ){
@@ -32,14 +33,15 @@ function Subtask_Progress_bar(props) {
       return conversion
     }
     else {
-      const conversion = "" + Math.round((Math.abs(11*days))) 
+      const gantViewtype = (gantView == true? 1:11)
+      const conversion = "" + Math.round((Math.abs(gantViewtype*days))) 
       return conversion
     }
   }
 
   const  time_conversion = (start,end) => {
-    console.log('start: '+start)
-    console.log('end: '+end)
+    //console.log('start: '+start)
+    //console.log('end: '+end)
     //console.log('it entered this function')
 
     const date1 = new Date(start)
@@ -115,12 +117,16 @@ function Subtask_Progress_bar(props) {
       time_conversion(start, end) 
       time_conversion_minimum_date(minimumdate, start)
 
-  }, []) 
+  }, [gantView]) 
 
   return (
     <div style={{ minWidth: sumOfBothBarAndGapLength+'px'/* ,backgroundColor: 'green' */}}>      
     <div style={{ position: 'relative', left: gapBeforeBegining+'px', padding: '3px', height: genheight, minWidth: sumOfBothBarLength+'px'}}>
-        
+        <Subtask_Time_Bar 
+          timeChange={props.timeChange}  entireTimes={props.entireTimes} times={props.times} 
+          startdate={start} enddate={end}
+          taskIndex={props.taskIndex} subtaskIndex={props.subtaskIndex}
+          />
         <div style={{ display: 'inline-block', backgroundColor: '#797979', height: genheight, width: doneBarLength +'px' }}> </div>
         <div style={{ display: 'inline-block', backgroundColor: 'black', height: genheight, width: undoneBarLength+'px'}}></div>        
     </div>

@@ -1,18 +1,10 @@
 
-const mongoose =  require("mongoose");
 const Project = require("../models/project");
 
-const get_projects = async (req, res) => {
+const express = require("express");
+const router = express.Router();
 
-  //const url = "mongodb://localhost:27017/juniper"
-  const url = process.env.MONGODB_URI || "mongodb://localhost:27017/juniper"
-  const options = { useNewUrlParser: true, useUnifiedTopology: true }
-
-  try{
-    await mongoose.connect( url ,options)
-  }catch(err){
-    console.log(err)}
-
+router.get("/projects", async (req, res) => {
   try {
     const projects = await Project.find({})   
 
@@ -29,8 +21,8 @@ const get_projects = async (req, res) => {
   } catch (error) {
     console.log(error); 
   }
-}; 
+}); 
 
 module.exports = {
-  projects: get_projects
+  projects: router
 };

@@ -31,7 +31,7 @@ const Task = (props) => {
       flex: 1,
       flexDirection: 'column',
       backgroundColor: '#fff',
-      alignItems: 'start',
+      alignItems: 'flex-start',
       justifyContent: 'center',
       margin: '2px',      
       //backgroundColor: 'purple',
@@ -41,11 +41,11 @@ const Task = (props) => {
       width: '100%',
       backgroundColor: '#fff',
       alignItems: 'flex-end',
-      justifyContent: 'end',
+      justifyContent: 'flex-end',
       margin: '2px'
     },
     task: {
-      fontSize: '18px',
+      fontSize: 18,
       fontWeight: 'bold',
       padding: '4px'
     },
@@ -60,7 +60,7 @@ const Task = (props) => {
     },
     subtask: {
       flex: 3,
-      fontSize: '16px',
+      fontSize: 16,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',

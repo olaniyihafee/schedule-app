@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { AsyncStorage, ActivityIndicator, StyleSheet, Text, View, Button } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {  ActivityIndicator, StyleSheet, Text, View, Button } from 'react-native';
+/* import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Week from './components/week';
@@ -9,16 +9,16 @@ import Task from './components/task';
 import { UserContext } from './otherFunctions/userContext';
 import {sortedProjects} from './otherFunctions/sortingFunctions'
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator(); */
 
 const App = () => {
-  const [projects, setProjects] = useState([]);
   const [animating, setAnimating] = useState(true);
-  var jumong = 'MainNavRoutes'
-  var read = []
+  /* var jumong = 'MainNavRoutes'
+  var read = [] */
 
-  useEffect(async () =>{
-   /*  const arraying = [ [7,2,3], [4,3,5,6], [0,1,9],[0,5,8] ]
+  const [projects, setProjects] = useState([]);
+  /* useEffect(async () =>{ */
+   /*  const arraying = [ [7,2,3], [4,3,5,6], [0,1,9],[0,5,8] ] 
     const newArray = []
     const newArrayForLarge = []
 
@@ -45,27 +45,32 @@ const App = () => {
     }
 
     console.log('arraying:' +arraying) */
+    /* try{ 
+        var read = await sortedProjects()
+        //var write = await AsyncStorage.getItem('projects')
+        setProjects(read)
+          //await AsyncStorage.setItem('projects', projects)
+        //console.log('mon: '+JSON.stringify(projects)) 
+    }
+    catch(err){
+      console.log(err)
+    }  */
 
-     read = await sortedProjects()
-    //var write = await AsyncStorage.getItem('projects')
-    await setProjects(read)
-      //await AsyncStorage.setItem('projects', projects)
-    console.log('mon: '+JSON.stringify(read))        
-  },()=>setProjects(read))
+ /*           
+  },[]) */
   return (
-      
-    <NavigationContainer>     
+    
+   /*  <NavigationContainer>     
 
       <Drawer.Navigator initialRoute='All Projects'>
          
-      {/* <ActivityIndicator
+      <ActivityIndicator
         animating={true}
         color="gray"
         size="large"
         style={styles.activityIndicator}
       />
- */}
-      {projects == undefined ? (
+ {projects === undefined ? (
       <Drawer.Screen
           name="All Projects"
           component={Week}
@@ -82,32 +87,35 @@ const App = () => {
           options={{headerShown: true}}
         />
         ):
-        (
+        ( 
           <Drawer.Screen
               name="All Projects"
               component={Task}
               // Hiding header for Navigation Drawer as we will use our custom header
               options={{headerShown: true}}
-            />)
-      }
-
-        {projects.map((project,index) => (
-          <Drawer.Screen 
-            name={project.projectname} 
-            component={Week} 
-            initialParams={{
-                            Mon: project.mon, 
-                            Tue: project.tue,
-                            Wed: project.wed, 
-                            Thr: project.thr,
-                            Fri: project.fri, 
-                            Sat: project.sat,
-                            Sun: project.sun
-                          }}
-            // Hiding header for Navigation Drawer as we will use our custom header
-            options={{headerShown: true}}
             />
-        ))}
+           )
+       } 
+
+        {
+          projects.map((project,index) => (
+            <Drawer.Screen 
+              name={project.projectname} 
+              component={Week} 
+              initialParams={{
+                              Mon: project.mon, 
+                              Tue: project.tue,
+                              Wed: project.wed, 
+                              Thr: project.thr,
+                              Fri: project.fri, 
+                              Sat: project.sat,
+                              Sun: project.sun
+                            }}
+              // Hiding header for Navigation Drawer as we will use our custom header
+              options={{headerShown: true}}
+              />
+          ))
+          }
         
         <Drawer.Screen
           name="Free"
@@ -118,18 +126,81 @@ const App = () => {
         />
       </Drawer.Navigator>
 
-    </NavigationContainer>
+    </NavigationContainer> */
+    
+    <View style={styles.container}>
 
+        <View style={styles.taskContainer}>
+          <Text style={styles.task}>props.task</Text>
+        </View>
+
+        <View style={styles.subtaskContainer}>
+          <Text style={styles.subtask}>props.subtask</Text><Text style={styles.time}>props.time</Text>
+        </View>
+
+      </View>
       
   );
 }
 export default App
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+}); */
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#fff',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    margin: '2px',      
+    //backgroundColor: 'purple',
+  },
+  taskContainer: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#fff',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    margin: '2px'
+  },
+  task: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    padding: '4px'
+  },
+  subtaskContainer: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    //backgroundColor: 'blue',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '2px'
+  },
+  subtask: {
+    flex: 3,
+    fontSize: 16,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '2px',
+    padding: '4px'
+  },
+  time: {
+    flex: 1,
+    //backgroundColor: 'orange',
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    margin: '2px',
+    padding: '4px'
   },
 });

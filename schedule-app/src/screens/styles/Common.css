@@ -50,6 +50,27 @@ li{
   background-color: transparent;
   display: inline-block;
 }
+.Button-Save {
+  width: 45px;
+  height: 25px;
+  color: rgb(41, 223, 56);
+  font-size: 12px;
+  border: 2px solid rgb(41, 223, 56);
+  border-radius: 5px;
+  display: inline-block;  
+  margin-bottom: 2px;
+  margin-left: 20px;
+}
+
+.ProgressMsgsDiv {
+  width: 200px;
+  height: 30px;
+  border-radius: 3px;
+  position:absolute;
+  background-color: rgb(199, 195, 192);
+  margin: 0px 43%;
+  z-index: 4;
+}
 
 .Float-Right {
   float: right;

@@ -3,17 +3,20 @@ import './styles/Each_Divisions_Division.css';
 import './styles/Common.css';
 import Table_Content from '../components/Table_Content/EDD_Table_Content';
 import { useEffect, useState, useContext } from 'react';
+import {BrowserRouter, Switch, Route, useHistory} from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import Subtask_Pop_up from '../components/Pop_up/Subtask_Pop_up';
 
-function Each_Division_Division(props) {
+function Each_Division_Division(props, location) {
 
   const [ test, setTest ] = useState([])
   const [ data1FromPopUP, setData1FromPopUp ] = useState([])
   const [ data2FromPopUP, setData2FromPopUp ] = useState([])
 
   const [ seen, setSeen ] = useState(false)
+
+  useEffect( async () => {console.log('props:  '+JSON.stringify(props))}, []) 
 
    const togglePop = () => {
      console.log(seen)
@@ -36,6 +39,8 @@ function Each_Division_Division(props) {
    /*console.log(seen) */
   };
 
+  const history = useHistory()
+
   return (
     <div className="Entire-Body">    
       
@@ -43,12 +48,15 @@ function Each_Division_Division(props) {
       {seen ? <Subtask_Pop_up toggle={togglePop} handleSubmit={popupSubmission}/> : null}
 
       <div className="Heading-Container">
-        <div>
+        <div onClick={()=>history.goback()}>
+        <Link  className="Link-Style" >
           <icon/>
           <header className="h1">
-            Specific Projects
+            {props.history.location.state.projectname}
           </header>
+        </Link>
         </div> 
+        
 
         <div className="Subtittles-Container">
 

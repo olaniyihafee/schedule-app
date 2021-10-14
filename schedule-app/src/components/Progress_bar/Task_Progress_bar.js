@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-
+import Time_Bar from '../Time_Bar/Task_Time_Bar'
 
 function Progress_bar(props) {
 
@@ -24,7 +24,7 @@ function Progress_bar(props) {
 
   //
 
-  const { minimumdate, start, end} = props
+  const { minimumdate, start, end, gantView} = props
 
   const days_interval_conversion_to_pixel = (days) => {
     if (days < 0 ){
@@ -32,14 +32,16 @@ function Progress_bar(props) {
       return conversion
     }
     else {
-      const conversion = "" + Math.round((Math.abs(11*days))) 
+      const gantViewtype = (gantView == true? 1:11)
+      //console.log('gantView:' +gantViewtype)
+      const conversion = "" + Math.round((Math.abs(gantViewtype*days))) 
       return conversion
     }
   }
 
   const  time_conversion = (start,end) => {
-    console.log('start: '+start)
-    console.log('end: '+end)
+    //console.log('start: '+start)
+    //console.log('end: '+end)
     //console.log('it entered this function')
 
     const date1 = new Date(start)
@@ -115,12 +117,12 @@ function Progress_bar(props) {
       time_conversion(start, end) 
       time_conversion_minimum_date(minimumdate, start)
 
-  }, []) 
+  }, [gantView]) 
 
   return (
     <div style={{ minWidth: sumOfBothBarAndGapLength+'px'/* ,backgroundColor: 'green' */}}>      
     <div style={{ position: 'relative', left: gapBeforeBegining+'px', padding: '3px', height: genheight, minWidth: sumOfBothBarLength+'px'}}>
-        
+        <Time_Bar timeChange={props.timeChange} entireTimes={props.entireTimes} times={props.times} startdate={start} enddate={end}/>
         <div style={{ display: 'inline-block', backgroundColor: '#E601DDA1', height: genheight, width: doneBarLength +'px'}}> </div>
         <div style={{ display: 'inline-block', backgroundColor: '#E601DD', height: genheight, width: undoneBarLength+'px'}}></div>        
     </div>

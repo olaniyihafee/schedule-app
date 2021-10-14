@@ -3,12 +3,12 @@
     min-height: 100%;
     display: visible;
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     background-color: rgba(0, 0, 0, 0.25);
   }
 
   .modal_content {
-    min-width: 30%;
+    width: 50%;
     height: "fit-content";
     background-color: white;
     position: absolute;
@@ -20,16 +20,18 @@
     height: 60%;
     /* background-color: rgb(15, 39, 175); */
     position: absolute;
+    height: "fit-content";
     left: 103%;
     right: 25%;
     top: 25%;
     bottom: 25%;
-    z-index: 1;
+    z-index: 5;
     display: none;
   }
   .popup_1 {
     background-color: rgb(226, 224, 106);
-    min-width: 50%;
+    width: 75%;
+    height: "fit-content";
   }
   .popup_2 {
     background-color: rgb(15, 175, 36);
@@ -40,6 +42,11 @@
     min-width: 30%;
   }
 
+  .error{
+    color: red;
+    margin: 0 auto;
+    padding: 0 auto;
+  }
   .each_list_bounding_box {
       margin-bottom: 8%
   }
@@ -51,7 +58,7 @@
 }
 
   .input_text {
-      width: 30%;
+      width: 20%;
       height: 15px;
       margin: 1% 5% 
   }
