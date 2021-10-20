@@ -12,12 +12,12 @@ import {
 
 export default function Project_Pop_up (prop) {
 
-    const [inputOthers, setInputOthersList] = useState([{ taskName: "",startDate: "",endDate: "",sun: "",mon: "",tue: "",wed: "",thu: "",fri: "",sat: "",subtask: [{ name: "",startDate: "",endDate: ""}] }]);
-    const [inputMain, setInputMainList] = useState([{projectName: "",startDate: "",endDate: "",sun: "",mon: "",tue: "",wed: "",thu: "",fri: "",sat: ""}]);
+    const [inputOthers, setInputOthersList] = useState([{ taskname: "",startdate: "",enddate: "",sun: "",mon: "",tue: "",wed: "",thu: "",fri: "",sat: "",times:["-"],subtastks: [{ subtaskname: "",startdate: "",enddate: "",times:["-"]}] }]);
+    const [inputMain, setInputMainList] = useState([{projectname: "",startdate: "",enddate: "",sun: "",mon: "",tue: "",wed: "",thu: "",fri: "",sat: ""}]);
 
     const [projectError, setProjectError] = useState('')
     const [taskError, setTaskError] = useState('')
-    const [subTaskError, setSubtaskError] = useState('eujtykdc h')
+    const [subTaskError, setSubtaskError] = useState('')
 
 // handle input change
 const isContainedInputMain = ( name, index ) => {
@@ -59,7 +59,7 @@ const isContainedInputMain = ( name, index ) => {
     setInputMainList(list);
     checkForIncompletePrerequisiteInProject(e, index, inputMain, setInputMainList, setProjectError)
 
-    console.log('inputMain: ' + inputMain.startDate)
+    console.log('inputMain: ' + inputMain.startdate)
 };
 
 
@@ -79,7 +79,7 @@ const isContainedInputMain = ( name, index ) => {
     outOfProjectSpan(index, e, inputMain, inputOthers, setInputOthersList, setProjectError)
     checkForIncompletePrerequisiteInTask(e, index, inputOthers, setInputOthersList, setTaskError)
 
-    console.log('inputMain: ' + inputMain.startDate)
+    console.log('inputMain: ' + inputMain.startdate)
 };
 
 // handle input change
@@ -119,13 +119,13 @@ const handleInputPopUpChange = (e, index, index2) => {
 
     console.log('This is the List name: '+name)
     const list = [...inputOthers];
-    list[index].subtask[index2][name] = value;
+    list[index].subtastks[index2][name] = value;
 
     setInputOthersList(list);
 
     emptySubTaskNameOrDate(index, index2, e, inputOthers, setInputOthersList, setTaskError)
 
-    console.log('inputMain: ' + inputMain.startDate)
+    console.log('inputMain: ' + inputMain.startdate)
 };
  
  // handle click event of the Remove button
@@ -137,7 +137,7 @@ const handleInputPopUpChange = (e, index, index2) => {
  
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputOthersList([...inputOthers, { taskName: "",startDate: "",endDate: "",sun: "",mon: "",tue: "",wed: "",thu: "",fri: "",sat: "",subtask: [{ name: "jumong",startDate: "jumong",endDate: ""}] }]);
+    setInputOthersList([...inputOthers, { taskname: "",startdate: "",enddate: "",sun: "",mon: "",tue: "",wed: "",thu: "",fri: "",sat: "",times:["-"],subtastks: [{ name: "jumong",startdate: "jumong",enddate: "",times:["-"]}] }]);
   };
 
 
@@ -152,13 +152,44 @@ const handleInputPopUpChange = (e, index, index2) => {
     console.log('value of index: ' +index)
     const placeholder = [...inputOthers]
     const placeholder2 = placeholder[index].subtask
-    placeholder[index].subtask = [...placeholder2,{ name: "",startDate: "",endDate: ""}]
+    placeholder[index].subtastks = [...placeholder2,{ subtaskname: "",startdate: "",enddate: "",times:["-"]}]
     setInputOthersList(placeholder);
   };
 
-  const handleSave = () => {
+  const handleContinueClick = () => {
     //prop.handleSubmit(inputMain, inputOthers)
     //prop.toggle
+    prop.handleSubmit(inputMain, inputOthers)
+    const resultForMainEmptyField = ((inputMain[0].projectname | inputMain[0].startdate | inputMain[0].enddate) == '')
+    const resultForOthersEmptyField = inputOthers.map((x,i)=>(x.taskname && x.startdate && x.enddate == ''))
+    const resultForOthersSubtasksEmptyField = []
+
+    console.log('resultForMainEmptyField: '+resultForMainEmptyField)
+    console.log('inputMain.projectname: '+inputMain[0].projectname)
+    console.log('inputMain.startdate: '+inputMain[0].startdate)
+    console.log('inputMain.enddate: '+inputMain[0].enddate)
+    if(!resultForMainEmptyField){ //if any part of the project part is not empty
+      console.log('Nothing in the Main is empty')
+      if(resultForOthersEmptyField.includes(false)){ //if any part of the 
+        console.log('Nothing in Others is empty')
+        inputOthers.map((tasks,i)=> {
+          if(tasks.tastkname && tasks.startdate && tasks.enddate !== ''){            
+            resultForOthersSubtasksEmptyField = tasks[i].map((subtasks,i)=> 
+              (inputMain.subtaskname && inputMain.startdate && inputMain.enddate == '')
+            )
+            if(resultForOthersSubtasksEmptyField.includes(false)){
+              console.log('Nothing in the Subtask is empty')
+              prop.handleSubmit(inputMain, inputOthers)
+            }
+            else{
+              setProjectError('Some Important Fields Are Empy')
+            }
+          }
+        })
+      }
+    }
+
+
   }
  
   var visibleId = null;
@@ -199,27 +230,27 @@ const handleInputPopUpChange = (e, index, index2) => {
           <p className='error'>{projectError}</p>
                 <input
                   className="input_text"
-                  name="projectName"
+                  name="projectname"
                   placeholder="Enter Task Name"
-                  value={x.projectName}
+                  value={x.projectname}
                   onChange={e => handleInputMainChange(e,i)}
                   onClick={e => setProjectError('')}
                 />
                 <input
                   type="date"
                   className="input_date"
-                  name="startDate"
+                  name="startdate"
                   placeholder="Start Date"
-                  value={x.startDate}
+                  value={x.startdate}
                   onChange={e => handleInputMainChange(e,i)}
                   onClick={e => setProjectError('')}
                 />
                 <input
                   type="date"
                   className="input_date"
-                  name="endDate"
+                  name="enddate"
                   placeholder="End Date"
-                  value={x.endDate}
+                  value={x.enddate}
                   onChange={e => handleInputMainChange(e,i)}
                   onClick={e => setProjectError('')}
                 />
@@ -326,9 +357,9 @@ const handleInputPopUpChange = (e, index, index2) => {
       <div className="each_list_bounding_box">
             <input
               className="input_text"
-              name="taskName"
+              name="taskname"
               placeholder="Enter Task Name"
-              value={x.taskName}
+              value={x.tastkname}
               onChange={e => handleInputOthersChange(e,i)}
               onClick={e => {
                 setProjectError('')
@@ -338,9 +369,9 @@ const handleInputPopUpChange = (e, index, index2) => {
             <input
               type="date"
               className="input_date"
-              name="startDate"
+              name="startdate"
               placeholder="Start Date"
-              value={x.startDate}
+              value={x.startdate}
               onChange={e => handleInputOthersChange(e,i)}
               onClick={e => {
                 setProjectError('')
@@ -350,9 +381,9 @@ const handleInputPopUpChange = (e, index, index2) => {
            <input
               type="date"
               className="input_date"
-              name="endDate"
+              name="enddate"
               placeholder="End Date"
-              value={x.endDate}
+              value={x.enddate}
               onChange={e => handleInputOthersChange(e,i)}
               onClick={e => {
                 setProjectError('')
@@ -472,10 +503,10 @@ const handleInputPopUpChange = (e, index, index2) => {
               </Accordion>
 
               <button onClick={e => showSubtask(`${i}`)}>Subtasks</button>
-              <div id={`${i}`} className="popup_test popup_1">{x.taskName}   
+              <div id={`${i}`} className="popup_test popup_1">{x.taskname}   
               
 
-              {x.subtask.map((y, j) => {
+              {x.subtastks.map((y, j) => {
                 return (
 
                   <div className="each_list_bounding_box">
@@ -483,35 +514,35 @@ const handleInputPopUpChange = (e, index, index2) => {
                       <p className='error'>{subTaskError}</p>
                         <input
                           className="input_text"
-                          name="name"
+                          name="subtaskname"
                           placeholder="Enter Task Name"
-                          value={y.name}
+                          value={y.subtaskname}
                           onChange={e => handleInputPopUpChange(e,i,j)}                          
                           onClick={e => setTaskError('')}
                         />
                         <input
                           type="date"
                           className="input_date"
-                          name="startDate"
+                          name="startdate"
                           placeholder="Start Date"
-                          value={y.startDate}
+                          value={y.startdate}
                           onChange={e => handleInputPopUpChange(e,i,j)}
                         />
                         <input
                           type="date"
                           className="input_date"
-                          name="endDate"
+                          name="enddate"
                           placeholder="End Date"
-                          value={y.endDate}
+                          value={y.enddate}
                           onChange={e => handleInputPopUpChange(e,i,j)}
                         />
 
 
                           <div className="each_list_buttons">
-                          {x.subtask.length !== 1 && <button
+                          {x.subtastks.length !== 1 && <button
                             className="remove_button"
                             onClick={() => handleRemoveSubtaskClick(j)}>Remove</button>}
-                          {x.subtask.length - 1 === j && <button 
+                          {x.subtastks.length - 1 === j && <button 
                               className="add_button"
                               onClick={() => handleAddSubtaskClick(i)} >Add</button>}
                         </div>
@@ -537,6 +568,10 @@ const handleInputPopUpChange = (e, index, index2) => {
 
     {/* <div style={{ marginTop: 20 }}>{JSON.stringify(inputMain)}</div>
     <div style={{ marginTop: 20 }}>{JSON.stringify(inputOthers)}</div> */}
+  <button 
+    className="continue_button"
+    //onClick={()=>prop.handleSubmit(inputMain, inputOthers)} 
+    onClick={()=>handleContinueClick()} >Continue</button>
 </div> {/* end of modal */}
 
    </div>

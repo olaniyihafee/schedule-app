@@ -31,8 +31,8 @@ function AL_Progress_bar(props) {
   }
 
   const  time_conversion = (start,end) => {
-    console.log('start: '+start)
-    console.log('end: '+end)
+    //console.log('start: '+start)
+    //console.log('end: '+end)
     //console.log('it entered this function')
 
     const date1 = new Date(start)
@@ -56,8 +56,8 @@ function AL_Progress_bar(props) {
     setDoneBarLength(donediffInDaysToPixel)
     setUndoneBarLength(undonediffInDaysToPixel)
 
-    console.log('setDoneBarLength: '+donediffInDaysToPixel)
-    console.log('setUndoneBarLength: '+undonediffInDaysToPixel)
+    //console.log('setDoneBarLength: '+donediffInDaysToPixel)
+    //console.log('setUndoneBarLength: '+undonediffInDaysToPixel)
 
     //console.log(getNumbersOfDays("2/1/2021", "3/1/2021"))
     

@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import {  ActivityIndicator, StyleSheet, Text, View, Button } from 'react-native';
-/* import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Week from './components/week';
@@ -9,15 +9,15 @@ import Task from './components/task';
 import { UserContext } from './otherFunctions/userContext';
 import {sortedProjects} from './otherFunctions/sortingFunctions'
 
-const Drawer = createDrawerNavigator(); */
+const Drawer = createDrawerNavigator(); 
 
-const App = () => {
+function App(){
   const [animating, setAnimating] = useState(true);
   /* var jumong = 'MainNavRoutes'
   var read = [] */
 
   const [projects, setProjects] = useState([]);
-  /* useEffect(async () =>{ */
+  useEffect(async () =>{ 
    /*  const arraying = [ [7,2,3], [4,3,5,6], [0,1,9],[0,5,8] ] 
     const newArray = []
     const newArrayForLarge = []
@@ -56,20 +56,20 @@ const App = () => {
       console.log(err)
     }  */
 
- /*           
-  },[]) */
+            
+  },[]) 
   return (
     
-   /*  <NavigationContainer>     
+   <NavigationContainer>     
 
       <Drawer.Navigator initialRoute='All Projects'>
          
-      <ActivityIndicator
+      {/* <ActivityIndicator
         animating={true}
         color="gray"
         size="large"
         style={styles.activityIndicator}
-      />
+      /> */}
  {projects === undefined ? (
       <Drawer.Screen
           name="All Projects"
@@ -126,19 +126,9 @@ const App = () => {
         />
       </Drawer.Navigator>
 
-    </NavigationContainer> */
+    </NavigationContainer> 
     
-    <View style={styles.container}>
-
-        <View style={styles.taskContainer}>
-          <Text style={styles.task}>props.task</Text>
-        </View>
-
-        <View style={styles.subtaskContainer}>
-          <Text style={styles.subtask}>props.subtask</Text><Text style={styles.time}>props.time</Text>
-        </View>
-
-      </View>
+    
       
   );
 }

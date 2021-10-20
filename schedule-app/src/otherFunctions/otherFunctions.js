@@ -102,7 +102,7 @@ const setBordersRed =()=>{
 export const emptyProjectNameOrDate =(index, e, inputMain, inputOthers, setInputOthersList, setProjectError)=>{
     
     console.log('it entered inside Main jumong Changes')
-    if( inputMain[0].projectName == ''){
+    if( inputMain[0].projectname == ''){
     
         console.log('it entered inside Main jumong Changes')
         const { name, value } = e.target;
@@ -118,7 +118,7 @@ export const emptyProjectNameOrDate =(index, e, inputMain, inputOthers, setInput
 export const emptySubTaskNameOrDate =(index, index2, e, inputOthers, setInputOthersList, setTaskError)=>{
     
     console.log('it entered inside Main jumong Changes')
-    if( inputOthers[index].taskName == ''){
+    if( inputOthers[index].taskname == ''){
     
         console.log('it entered inside Main Changes')
     const { name, value } = e.target;
@@ -138,15 +138,15 @@ export const outOfProjectSpan =(index, e, inputMain, inputOthers, setInputOthers
     
     const { name, value } = e.target;
 
-    if (name == 'startDate' || 'endDate'){
+    if (name == 'startdate' || 'enddate'){
 
-        const startdate = inputOthers[index].startDate
-        const enddate = inputOthers[index].endDate
+        const startdate = inputOthers[index].startdate
+        const enddate = inputOthers[index].enddate
 
-        const startDateExclusion = (inputMain[0].startDate >= startdate) || ((inputMain[0].startDate) == '') || (startdate <= enddate)
-        const endDateExclusion = (inputMain[0].endDate <= enddate) || ((inputMain[0].endDate) == '') || (startdate >= enddate)
+        const startDateExclusion = (inputMain[0].startdate >= startdate) || ((inputMain[0].startdate) == '') || (startdate <= enddate)
+        const endDateExclusion = (inputMain[0].enddate <= enddate) || ((inputMain[0].enddate) == '') || (startdate >= enddate)
         
-        if (name == 'startDate'){
+        if (name == 'startdate'){
             if(startDateExclusion){
                 const list = [...inputOthers];
                 list[index][name] = '';
@@ -156,7 +156,7 @@ export const outOfProjectSpan =(index, e, inputMain, inputOthers, setInputOthers
             }
         }
 
-        else if (name == 'endDate'){
+        else if (name == 'enddate'){
             if(endDateExclusion){
                 const list = [...inputOthers];
                 list[index][name] = '';
@@ -175,9 +175,9 @@ export const checkForIncompletePrerequisiteInProject =(e, index, inputMain, setI
     const oneOfTheDays = ('sun' || 'mon' || 'tue' || 'wed' || 'thu' || 'fri' || 'sat')
 
     const  dailyCondition = ( ( name == oneOfTheDays) && 
-    (((inputMain[0].startDate || inputMain[0].endDate) == '' ) || ( inputMain[0].projectName == '')) )
+    (((inputMain[0].startdate || inputMain[0].enddate) == '' ) || ( inputMain[0].projectname == '')) )
 
-    const startAndEndDateCondition = (name == 'startDate' || 'endDate' || oneOfTheDays ) && ( inputMain[0].projectName == '')
+    const startAndEndDateCondition = (name == 'startdate' || 'enddate' || oneOfTheDays ) && ( inputMain[0].projectname == '')
 
     if(startAndEndDateCondition){
         //console.log('This is the List name: '+name)
@@ -202,9 +202,9 @@ export const checkForIncompletePrerequisiteInTask =(e, index, inputOthers, setIn
     const oneOfTheDays = ('sun' || 'mon' || 'tue' || 'wed' || 'thu' || 'fri' || 'sat')
 
     const  dailyCondition = ( ( name == oneOfTheDays) && 
-    (((inputOthers[index].startDate || inputOthers[index].endDate) == '' ) || ( inputOthers[index].taskName == '')) )
+    (((inputOthers[index].startdate || inputOthers[index].enddate) == '' ) || ( inputOthers[index].taskname == '')) )
 
-    const startAndEndDateCondition = (name == 'startDate' || 'endDate' || oneOfTheDays ) && ( inputOthers[index].taskName == '')
+    const startAndEndDateCondition = (name == 'startdate' || 'enddate' || oneOfTheDays ) && ( inputOthers[index].taskname == '')
 
     if(startAndEndDateCondition){
         //console.log('This is the List name: '+name)
@@ -227,9 +227,9 @@ export const checkForIncompletePrerequisiteInTask =(e, index, inputOthers, setIn
     const { name, value } = e.target;
 
     const  dailyCondition = ( name == 'Sun' || 'Mon' || 'Tue' || 'Wed' || 'thr' || 'Fri' || 'Sat' ) && 
-    (('startDate' || 'endDate' == '' ) || ( inputMain[0].projectName == ''))
+    (('startdate' || 'enddate' == '' ) || ( inputMain[0].projectname == ''))
 
-    const startAndEndDateCondition = (name == 'startDate' || 'endDate' || dailyCondition ) && ( inputMain[0].projectName == '')
+    const startAndEndDateCondition = (name == 'startdate' || 'enddate' || dailyCondition ) && ( inputMain[0].projectname == '')
 
     if(startAndEndDateCondition){
         //console.log('This is the List name: '+name)

@@ -1,13 +1,20 @@
 
 let url ="http://localhost:3000/projects"
 
-export const getProjects = async () => {
+export const getProjects = async (options = {}) => {
+  const { timeout = 8000 } = options
+
+  const controller = new AbortController();
+  const id = setTimeout(()=> controller.abort(), timeout)
     var read = await fetch(url,{
                   "method": 'GET',
                   "headers": {
                     "content-type": "application/json"
                   },
-                })
+                  ...options,
+                  signal: controller.signal
+                });
+                clearTimeout(id)
       return read.json() 
 }
 

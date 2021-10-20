@@ -11,14 +11,14 @@ const Task = (props) => {
       }) */
 
     return (
-      <View style={styles.container}>
+      <View /* style={styles.container} */>
 
-        <View style={styles.taskContainer}>
-          <Text style={styles.task}>{props.task}</Text>
+        <View /* style={styles.taskContainer} */>
+          <Text /* style={styles.task} */>{props.task}</Text>
         </View>
 
-        <View style={styles.subtaskContainer}>
-          <Text style={styles.subtask}>{props.subtask}</Text><Text style={styles.time}>{props.time}</Text>
+        <View /* style={styles.subtaskContainer} */>
+          <Text /* style={styles.subtask} */>{props.subtask}</Text><Text /* style={styles.time} */>{props.time}</Text>
         </View>
 
       </View>

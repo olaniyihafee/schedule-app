@@ -12,7 +12,7 @@
     width: 90%;
     height: 40px;
     margin: 5px auto;
-    border: solid 2px black ;
+    border: solid 2px rgba(0, 0, 0, 0.363) ;
     border-radius: 4px;
     padding: auto 5px;
     padding-left: 15px;

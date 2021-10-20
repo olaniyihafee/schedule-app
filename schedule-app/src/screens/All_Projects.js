@@ -2,7 +2,7 @@ import './styles/All_Projects.css';
 import './styles/Common.css';
 import { getProjects } from '../otherFunctions/api'
 import { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AL_Progress_bar from '../components/Progress_bar/AL_Progress_bar'
 import Project_Pop_up from '../components/Pop_up/Project_Pop_up';
 import { saveProject } from "../otherFunctions/api"
@@ -17,58 +17,40 @@ function All_Projects() {
 
   useEffect( async () => {
 
-     getProjects().then( data => {
-       console.log(data)       
-       localStorage.setItem('my-projects', JSON.stringify(data));
-       console.log(data.projects) 
-       var data2 = data.projects
-       var data3 = [...data2]
-       setProjects(projects => [].concat(...data2))
-     })
-     .catch(err => {console.log(err);});  
-
-  /*   let resultFromServer = []
+    let resultFromServer = []
 
    // setTimeout(async () => {
-      console.log('It entered the first time out')
       //setAnimating(false);
-      resultFromServer = await getProjects()
-      console.log('resultFromServer: '+resultFromServer) 
+      try{
+        resultFromServer = await getProjects()
+        //console.log('resultFromServer: '+JSON.stringify(resultFromServer) )
+      }catch(error){
+        console.log(error)
+      }
    // }, 5000)
 
-    if(resultFromServer == null){
-      console.log('It entered resultFromServer null')
-      console.log('resultFromServer inside not null: '+resultFromServer) 
+    if(await resultFromServer == ''){
       let resultFromLocalStorage = localStorage.getItem('projects')
-      setProjects(projects => [].concat(...resultFromLocalStorage))
+      //console.log('resultFromLocalStorage: '+JSON.parse(resultFromLocalStorage))
+      setProjects(projects => [].concat(JSON.parse(resultFromLocalStorage)))
     }
       
     else{
-      console.log('It entered resultFromServer not null')
+      //console.log('resultFromServer inside not null: '+JSON.stringify(resultFromServer)) 
       var Projects = resultFromServer.projects
       setProjects(projects => [].concat(Projects))
-      localStorage.setItem('projects', Projects)
+      localStorage.setItem('projects', JSON.stringify(Projects))
     }
 
-    let backedup = localStorage.getItem('online-backup') */
+    let backedup = localStorage.getItem('online-backup') 
 
-     /* if(backedup !== null){
-      setTimeout(async () => {
+     if(backedup !== null){
+      
+     }
+    /* setTimeout(async () => {
         //setAnimating(false);
         getProjects()
-      }, 5000)
-     } */
-    
-      /* //var data = localStorage.getItem('my-projects')
-      var data2 = JSON.parse(data)
-      var data3 = data2.projects
-      //setProjects(JSON.parse(data))
-      //console.log(JSON.parse(data));
-      var data4 = data3[0].tastks[0];
-
-      setProjects(data.projects) */
-      //console.log(projects);
-      //console.log(data4)
+      }, 5000) */
   }, []) 
  
   
@@ -84,14 +66,33 @@ function All_Projects() {
    function settingStates(List, otherList){
     setData1FromPopUp(List)
     setData2FromPopUp(otherList)
+    /* const placeholder1 = data1FromPopUP[0]
+    const placeholder2 = data2FromPopUP */
+    const placeholder1 = List[0]
+    //const placeholder2 = 
+    placeholder1.tastks = [otherList]
+    const combination = placeholder1
+
+    return combination
    }
 
+   const history = useHistory()
+
    const popupSubmission = (List, otherList) => {
+     console.log('Yeah it Entered Redirect')
     console.log(List)
     console.log(otherList)
-    settingStates(List, otherList)
+    const newProject = settingStates(List, otherList)
+
+    const placeholder = projects
+    placeholder.push(newProject)
+
+    setProjects(projects => [].concat(placeholder))
+
+    history.replace({pathname:"/Each_Project_Division", state: {content_to_EPD_from_AP: newProject.tastks, projectname: newProject.projectname}})
+    
     setSeen(!seen);
-     
+    console.log('projects from popup: '+ JSON.stringify(placeholder))
     console.log('data1 From PopUp: '+ JSON.stringify(data1FromPopUP))
     console.log('data2 From PopUp: '+ JSON.stringify(data2FromPopUP))
    /*console.log(seen) */
@@ -185,11 +186,14 @@ function All_Projects() {
           <header className="h1">
             Projects
           </header>
-
-          <button className="Float-Right Button-Save" style={{display: 'block'}} onClick={togglePop}>
-            Saveivon
-          </button> 
-
+         
+          <div>
+            <label className="Inline Float-Right switch">
+              <input className="checkbutton" type="checkbox" onChange={()=>this.hogoromo()}/>
+                <span className="slider round">
+                  </span>
+            </label>
+          </div>
           
 
         <div className="Float-Right Button-Blue"><img className="trash" onClick={togglePop}/>

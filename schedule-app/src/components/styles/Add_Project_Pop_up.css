@@ -111,8 +111,9 @@
   margin: 5px;
 }
 
-.save_button {
-  min-width: 60px;
+
+.continue_button {
+  min-width: 100px;
   font-size: 12px;
   background-color: blue;
   color: white;
@@ -122,3 +123,4 @@
   float: left;
   margin: 20px;
 }
+
