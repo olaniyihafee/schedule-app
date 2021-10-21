@@ -123,7 +123,7 @@ function Subtask_Progress_bar(props) {
     <div style={{ minWidth: sumOfBothBarAndGapLength+'px'/* ,backgroundColor: 'green' */}}>      
     <div style={{ position: 'relative', left: gapBeforeBegining+'px', padding: '3px', height: genheight, minWidth: sumOfBothBarLength+'px'}}>
         <Subtask_Time_Bar 
-          timeChange={props.timeChange}  entireTimes={props.entireTimes} times={props.times} 
+          timeChange={props.timeChange}  entireTimes={props.entireTimes} times={props.times} timeView={props.timeView}
           startdate={start} enddate={end}
           taskIndex={props.taskIndex} subtaskIndex={props.subtaskIndex}
           />

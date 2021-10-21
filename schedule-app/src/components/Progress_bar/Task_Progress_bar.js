@@ -122,7 +122,8 @@ function Progress_bar(props) {
   return (
     <div style={{ minWidth: sumOfBothBarAndGapLength+'px'/* ,backgroundColor: 'green' */}}>      
     <div style={{ position: 'relative', left: gapBeforeBegining+'px', padding: '3px', height: genheight, minWidth: sumOfBothBarLength+'px'}}>
-        <Time_Bar timeChange={props.timeChange} entireTimes={props.entireTimes} times={props.times} startdate={start} enddate={end}/>
+        <Time_Bar timeChange={props.timeChange} entireTimes={props.entireTimes} times={props.times} timeView={props.timeView}
+          startdate={start} enddate={end}/>
         <div style={{ display: 'inline-block', backgroundColor: '#E601DDA1', height: genheight, width: doneBarLength +'px'}}> </div>
         <div style={{ display: 'inline-block', backgroundColor: '#E601DD', height: genheight, width: undoneBarLength+'px'}}></div>        
     </div>

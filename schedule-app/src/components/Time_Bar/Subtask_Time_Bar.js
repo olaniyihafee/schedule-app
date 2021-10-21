@@ -16,8 +16,6 @@ componentWillMount(){
   this.setState({times: this.props.times});
   //console.log('Times: '+props.times)
   this.setState({entireTimes: this.props.entireTimes});
-  //console.log('entireTimes: '+this.state.entireTimes)
-  //console.log('entireTimes: '+this.props.entireTimes)
 } 
 
   // handle click event of the Remove button
@@ -160,7 +158,7 @@ timeChange = (e ,i, startTime) => {
     return (
       <div style={{ width: 'inherit',backgroundColor: '#E601DDA1', height: '0px'}} >  
         <div
-          style={{ display:'inline',
+          style={{ display: this.props.timeView ? 'inline' : 'none' ,
             position: 'sticky' ,top:'1%',left: '10%',
             zIndex: '4', paddingTop: '9px',width: '270px',height: '0px'
           }}>

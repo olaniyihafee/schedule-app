@@ -151,16 +151,16 @@ const handleInputPopUpChange = (e, index, index2) => {
   const handleAddSubtaskClick = (index) => {
     console.log('value of index: ' +index)
     const placeholder = [...inputOthers]
-    const placeholder2 = placeholder[index].subtask
+    const placeholder2 = placeholder[index].subtastks
     placeholder[index].subtastks = [...placeholder2,{ subtaskname: "",startdate: "",enddate: "",times:["-"]}]
     setInputOthersList(placeholder);
   };
 
   const handleContinueClick = () => {
-    //prop.handleSubmit(inputMain, inputOthers)
-    //prop.toggle
     prop.handleSubmit(inputMain, inputOthers)
-    const resultForMainEmptyField = ((inputMain[0].projectname | inputMain[0].startdate | inputMain[0].enddate) == '')
+    //prop.toggle
+    
+    const resultForMainEmptyField = ((inputMain[0].projectname || inputMain[0].startdate || inputMain[0].enddate) == null)
     const resultForOthersEmptyField = inputOthers.map((x,i)=>(x.taskname && x.startdate && x.enddate == ''))
     const resultForOthersSubtasksEmptyField = []
 
@@ -168,13 +168,17 @@ const handleInputPopUpChange = (e, index, index2) => {
     console.log('inputMain.projectname: '+inputMain[0].projectname)
     console.log('inputMain.startdate: '+inputMain[0].startdate)
     console.log('inputMain.enddate: '+inputMain[0].enddate)
+
+    try{
     if(!resultForMainEmptyField){ //if any part of the project part is not empty
       console.log('Nothing in the Main is empty')
       if(resultForOthersEmptyField.includes(false)){ //if any part of the 
         console.log('Nothing in Others is empty')
         inputOthers.map((tasks,i)=> {
-          if(tasks.tastkname && tasks.startdate && tasks.enddate !== ''){            
-            resultForOthersSubtasksEmptyField = tasks[i].map((subtasks,i)=> 
+          if(tasks.taskname && tasks.startdate && tasks.enddate !== ''){    
+            console.log('tasks[i]: '+tasks[i])  
+            console.log('inputOthers: '+inputOthers)      
+            resultForOthersSubtasksEmptyField = tasks[i].forEach((subtasks,i)=> 
               (inputMain.subtaskname && inputMain.startdate && inputMain.enddate == '')
             )
             if(resultForOthersSubtasksEmptyField.includes(false)){
@@ -188,6 +192,7 @@ const handleInputPopUpChange = (e, index, index2) => {
         })
       }
     }
+    }catch(err){console.log(err)}
 
 
   }

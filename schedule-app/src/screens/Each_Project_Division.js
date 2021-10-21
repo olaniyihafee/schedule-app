@@ -2,7 +2,10 @@
 import './styles/Common.css';
 import './styles/Each_Project_Division.css';
 import Table_Content from '../components/Table_Content/EPD_Table_Content';
+import { saveProject } from "../otherFunctions/api"
+import { placeInLocalBackUp } from "../otherFunctions/saveFunctions"
 import React, { useEffect, useState, useContext } from 'react';
+import { MdAssignment, MdSettings, MdAdd, MdDone, MdViewArray, MdViewDay ,MdWatchLater, MdArrowBackIos } from "react-icons/md"
 
 import { Link } from 'react-router-dom';
 import Task_Pop_up from '../components/Pop_up/Subtask_Pop_up';
@@ -16,13 +19,19 @@ class Each_Project_Division extends React.Component {
                   data2FromPopUP: [],
                   progressMsgs: '',
                   gantView: false,
+                  timeView: false,
+                  saveButtonVisible: 'none',
                   seen: false
      };
   }
  
   componentWillMount(){   
     this.setState({test: this.props.history.location.state.content_to_EPD_from_AP})
-    console.log('This is test upload inside EPD: '+JSON.stringify(this.props.history.location.state.content_to_EPD_from_AP))
+    if(this.props.history.location.state.firstTime) {
+      this.setState({saveButtonVisible: 'block'})
+      this.setState({timeView: true})
+    }
+    //onsole.log('This is test upload inside EPD: '+JSON.stringify(this.props.history.location.state.content_to_EPD_from_AP))
   }
 
    togglePop = () => {
@@ -32,6 +41,10 @@ class Each_Project_Division extends React.Component {
    settingGantView = () => {
     this.setState({ gantView: !this.state.gantView})
   };
+  settingTimeView = () => {
+    this.setState({ timeView: !this.state.timeView})
+    console.log('this.state.timeView: '+this.state.timeView)
+  };
     
    settingStates = (List, otherList)=> {
     this.setState({ data1FromPopUP: List }) 
@@ -39,13 +52,13 @@ class Each_Project_Division extends React.Component {
    }
 
    popupSubmission = (List, otherList) => {
-    console.log(List)
-    console.log(otherList)
+    //console.log(List)
+    //console.log(otherList)
     this.settingStates(List, otherList)
     this.setState({ seen: !this.state.seen });
      
-    console.log('data1 From PopUp: '+ JSON.stringify(this.state.data1FromPopUP))
-    console.log('data2 From PopUp: '+ JSON.stringify(this.state.data2FromPopUP))
+    //console.log('data1 From PopUp: '+ JSON.stringify(this.state.data1FromPopUP))
+    //console.log('data2 From PopUp: '+ JSON.stringify(this.state.data2FromPopUP))
    /*console.log(seen) */
   };
 
@@ -58,9 +71,9 @@ class Each_Project_Division extends React.Component {
     }
   }
   handleInputOthersChangeTimeVersion=(taskIndex, subtaskIndex, time, index, operationType)=>{
-    console.log('It entered this function it just didnt alert')
+    //console.log('It entered this function it just didnt alert')
     const hold= Object.entries(taskIndex)
-    alert('it worked: '+hold[0][1]+" "+subtaskIndex+' '+time,)
+    //alert('it worked: '+hold[0][1]+" "+subtaskIndex+' '+time,)
     const tIndex = hold[0][1]
 
    // setProgressMsgs('Progress Saved')
@@ -71,23 +84,15 @@ class Each_Project_Division extends React.Component {
   
     console.log('This is the List name: '+name)*/
     const list = [...this.state.test];
-
-    //console.log('The List: '+list)
-    //console.log('The List With the required index and sub: '+list[tIndex])
-    //console.log('The List With the required index and sub: '+JSON.stringify(list[tIndex]))
-    //console.log('The List With the required index and sub and time: '+list[tIndex][0].subtastks[subtaskIndex].times)
     list[tIndex][0].subtastks[subtaskIndex].times[index] = time;
   
     this.setState({ test: list});   
-    console.log('The test: '+JSON.stringify(this.state.test))
-    
-    //outOfProjectSpan(index, e, inputMain, inputOthers, setInputOthersList, setProjectError)
-    //checkForIncompletePrerequisiteInTask(e, index, inputOthers, setInputOthersList, setTaskError) */
+    //console.log('The test: '+JSON.stringify(this.state.test))
   };
 
   
-  /* saveEntireProject =()=> {
-    const containNullToggle = false
+  saveEntireProject = async()=> {
+    let containNullToggle = false
 
     this.state.test.forEach((w,iw)=>{
       w.forEach((x,ix)=>{ 
@@ -96,15 +101,39 @@ class Each_Project_Division extends React.Component {
             if(z ==( '' || '-')){
               this.setState({ progressMsgs: 'Some of The Subtask Time are Empty'})
               containNullToggle = true
+              setTimeout(() => this.setState({ progressMsgs: ''}), 1000)
             }
           }) 
         })     
       });
     })
 
-    if(containNullToggle == false) 
+    this.setState({ progressMsgs: 'Saving Project...'})
+    let resultFromServer
+    
+    if(containNullToggle == false) {
+      try{
+        resultFromServer = await saveProject(this.props.history.location.state.entireProject)
+        //console.log('resultFromServer: '+JSON.stringify(resultFromServer) )
+      }catch(error){
+        console.log(error)
+      }
 
-  } */
+      if(await resultFromServer == 'project saved'){
+        this.setState({ progressMsgs: 'Project Saved'})
+      }
+      else{
+        placeInLocalBackUp(this.state.test, 'unsavedOnlineProject') //backs it up before user sets all the times
+        this.setState({ progressMsgs: 'Saved in Backup'})
+        setTimeout(() => this.setState({ progressMsgs: ''}), 1000)
+        
+      }
+      
+      this.setState({saveButtonVisible: 'none'})
+      this.setState({timeView: false})
+    }
+
+  } 
   
  /* // handle click event of the Remove button
 const handleRemoveTaskTimeClick = index => {
@@ -147,9 +176,9 @@ const handleAddSubtaskTimeClick = (index) => {
         <div className="Heading-Container">
           <div>
             <Link  className="Link-Style" to="/">
-              <icon/>
               <header className="h1">
-                Projects
+              <MdArrowBackIos  className="colored-icons"/> 
+              Projects
               </header>
             </Link>          
           </div> 
@@ -165,13 +194,15 @@ const handleAddSubtaskTimeClick = (index) => {
 
           <div className="Subtittles-Container">
               
-          <div className="Inline Float-Right">            
-              <button className="Inline Button Button-Normal"  onClick={this.settingGantView}>
-                Narrow veiw
-              </button>   
+          <div className="Inline Float-Right">  
+          
+              <MdWatchLater onClick={this.settingTimeView} className="colored-icons"/> 
+
+              {this.state.gantView ? (<MdViewArray onClick={this.settingGantView} className="colored-icons"/>):(<MdViewDay onClick={this.settingGantView} className="colored-icons"/>)}
+              
               <Link to="/Settings">
-                <icon/>  
                 <button className="Inline Button Button-Normal">
+                  <MdSettings  className="icons"/> 
                   Settings
                 </button>
               </Link>           
@@ -184,13 +215,15 @@ const handleAddSubtaskTimeClick = (index) => {
               </header>           
 
               <div className="Inline">
-                <button className="Button-Save" style={{display: 'block'}} onClick={this.saveEntireProject}>
+                <button className="Button-Save" style={{display: this.state.saveButtonVisible}} onClick={this.saveEntireProject}>
+                <MdDone  className="small-icons"/> 
                   Save
                 </button> 
               </div>
               <div className="Inline Float-Right">
                 <icon/>
                 <button className="Button Button-Blue" onClick={this.togglePop}>
+                <MdAdd  className="icons"/> 
                   Task
                 </button>            
               </div>
@@ -204,8 +237,8 @@ const handleAddSubtaskTimeClick = (index) => {
 
           <hr className="Horizontal-Line"></hr>
 
-          <div className="ProgressMsgsDiv">
-            <span>{this.state.progressMsgs}</span>
+          <div className="ProgressMsgsDiv" style={{display: this.state.progressMsgs == '' ? 'none': 'block'}}>
+            <span className="ProgressMsgs">{this.state.progressMsgs}</span>
           </div>
 
         </div>
@@ -215,6 +248,7 @@ const handleAddSubtaskTimeClick = (index) => {
             content_to_EPD_tableContent_from_EPD={this.state.test} 
             projectname={this.props.history.location.state.projectname}
             gantView={this.state.gantView}
+            timeView={this.state.timeView}
             timeChange={this.handleInputOthersChangeTimeVersion}
           />
         </div>

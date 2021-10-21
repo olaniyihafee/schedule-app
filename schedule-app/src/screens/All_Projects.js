@@ -6,7 +6,8 @@ import { Link, useHistory } from 'react-router-dom';
 import AL_Progress_bar from '../components/Progress_bar/AL_Progress_bar'
 import Project_Pop_up from '../components/Pop_up/Project_Pop_up';
 import { saveProject } from "../otherFunctions/api"
-import imaging from "../assets/trash2.svg"
+import { placeInLocalBackUp } from "../otherFunctions/saveFunctions"
+import { MdAssignment, MdSettings, MdAdd } from "react-icons/md"
 
 function All_Projects() {
 
@@ -40,13 +41,30 @@ function All_Projects() {
       var Projects = resultFromServer.projects
       setProjects(projects => [].concat(Projects))
       localStorage.setItem('projects', JSON.stringify(Projects))
+
+      let backedup = localStorage.getItem('backUpToPushOnline') 
+
+      if(backedup !== null){
+        
+        let backedup = []
+        backedup = localStorage.getItem('backUpToPushOnline') 
+        let backedupParse = JSON.parse(backedup)
+
+        let placeholder
+        backedupParse.forEach((backupContent, index)=>{
+          if(backupContent.type == 'newProjectWithoutTime'){
+            placeholder.push(backupContent.body) 
+          }
+          else{
+            
+          }
+          let placeholder2 = projects
+          [placeholder2].concat(placeholder)
+          setProjects(projects => [].concat(placeholder2))
+        })
+      }
     }
 
-    let backedup = localStorage.getItem('online-backup') 
-
-     if(backedup !== null){
-      
-     }
     /* setTimeout(async () => {
         //setAnimating(false);
         getProjects()
@@ -78,8 +96,7 @@ function All_Projects() {
 
    const history = useHistory()
 
-   const popupSubmission = (List, otherList) => {
-     console.log('Yeah it Entered Redirect')
+   const popupSubmission = async (List, otherList) => {
     console.log(List)
     console.log(otherList)
     const newProject = settingStates(List, otherList)
@@ -88,9 +105,18 @@ function All_Projects() {
     placeholder.push(newProject)
 
     setProjects(projects => [].concat(placeholder))
-
-    history.replace({pathname:"/Each_Project_Division", state: {content_to_EPD_from_AP: newProject.tastks, projectname: newProject.projectname}})
+    placeInLocalBackUp(newProject, 'newProjectWithoutTime') //backs it up before user sets all the times
     
+    setTimeout(async () => {
+      history.replace({pathname:"/Each_Project_Division", 
+      state: {content_to_EPD_from_AP: newProject.tastks, 
+        projectname: newProject.projectname, 
+        firstTime: true, 
+        entireProject: newProject
+      }
+    })
+    }, 3000)
+
     setSeen(!seen);
     console.log('projects from popup: '+ JSON.stringify(placeholder))
     console.log('data1 From PopUp: '+ JSON.stringify(data1FromPopUP))
@@ -184,6 +210,7 @@ function All_Projects() {
 
       <div className="Heading-Container">
           <header className="h1">
+            <MdAssignment className="icons"/>
             Projects
           </header>
          
@@ -196,15 +223,17 @@ function All_Projects() {
           </div>
           
 
-        <div className="Float-Right Button-Blue"><img className="trash" onClick={togglePop}/>
+        <div className="Float-Right">
+
           <button value ="New Projects" className="Button Button-Blue" onClick={togglePop}>
-            <icon type={imaging} className="trash" onClick={togglePop}/>
+            <MdAdd  className="icons"/> 
             New Projects
           </button> 
+
           <div className="Float-Right">
-            <Link to="/Settings">
-            <img className="trash" onClick={togglePop}/>  
+            <Link to="/Settings"> 
               <button className="Button Button-Normal">
+              <MdSettings  className="icons"/> 
                 Settings
               </button> 
             </Link>           

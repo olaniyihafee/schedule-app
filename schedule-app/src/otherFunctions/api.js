@@ -1,12 +1,12 @@
 
-let url ="http://localhost:3000/projects"
+let url ="http://localhost:3000"
 
 export const getProjects = async (options = {}) => {
   const { timeout = 8000 } = options
 
   const controller = new AbortController();
   const id = setTimeout(()=> controller.abort(), timeout)
-    var read = await fetch(url,{
+    var read = await fetch(url + '/projects',{
                   "method": 'GET',
                   "headers": {
                     "content-type": "application/json"
@@ -18,20 +18,22 @@ export const getProjects = async (options = {}) => {
       return read.json() 
 }
 
-export const saveProject = async (body) => {
-    fetch(url + '/project',{
-        "method": 'POST',
-        "headers": {
-          "content-type": "application/json"
-        },
-        "body": body
-      })
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        localStorage.setItem('my-test', JSON.stringify(response));
-      })
-      .catch(err => {console.log(err);}); 
+export const saveProject = async (body, options = {}) => {  
+  const { timeout = 8000 } = options
+
+  const controller = new AbortController();
+  const id = setTimeout(()=> controller.abort(), timeout)
+  var read = await fetch(url + '/project',{
+      "method": 'POST',
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": JSON.stringify(body),
+      ...options,
+      signal: controller.signal
+    });
+    clearTimeout(id)
+    return read.json() 
 }
 
 export const saveTask = async (body) => {

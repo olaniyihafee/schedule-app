@@ -129,7 +129,7 @@ timeChange = (e ,i, startTime) => {
                   if(timeInclusion){
                     //alert('Time Error: '+endTime)
                     
-                    this.setState({errorMsg: 'The start time is Empty'})
+                    this.setState({errorMsg: 'Time intersect with '+x.taskname+' '+y.subtaskname+' '+june})
                     entireTimeCheckResult.push(false)
                   }
                 }) 
@@ -149,7 +149,7 @@ timeChange = (e ,i, startTime) => {
     return (
       <div style={{ width: 'inherit',backgroundColor: '#E601DDA1', height: '0px'}} >  
         <div
-          style={{ display:'inline',
+          style={{ display: this.props.timeView ? 'inline' : 'none' ,
             position: 'sticky' ,top:'1%',left: '10%',
             zIndex: '4', paddingTop: '9px',width: '270px',height: '0px'
           }}>
@@ -206,7 +206,7 @@ timeChange = (e ,i, startTime) => {
                     onSubmit={this.handleAddTimeClick}>     
                 </button>}
               </div>
-              <div>{this.state.errorMsg}</div>
+              <div style={{ fontSize: '12px', color: 'red'}}>{this.state.errorMsg}</div>
           </div> )
         }) } 
         

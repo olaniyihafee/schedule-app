@@ -5,17 +5,17 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/project", async (req, res) => {
+  console.log(req.body)
   try {
-    const response = await Project.create({
-        email, name, password, profilePicture
-    })  
+    const { projectname, startdate, enddate, tastks } = req.body
+    const response = await Project.create({ projectname, startdate, enddate, tastks })  
 
-    if( projects === null ){
+    /* if( response === null ){
       console.log({ message: 'it didnt find it' })
-    }
-    console.log(projects);
+    } */
+    console.log('response: '+response);
 
-    res.send({ projects })
+    //res.send({ projects })
 
     //( JSON.stringify(projects) )
     //body({ projects })

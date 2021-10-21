@@ -8,6 +8,7 @@ import Task_Progress_bar from '../Progress_bar/Task_Progress_bar'
 import Subtask_Progress_bar from '../Progress_bar/Subtask_Progress_bar'
 
 import { Link } from 'react-router-dom';
+import { MdArrowDropDown, MdTouchApp } from "react-icons/md"
 
 import React from 'react'
               
@@ -196,10 +197,10 @@ handleExpansion = (index) =>{
                                           
                                             <li className="Tasks">
                                               <Link to={{pathname:"/Each_Divisions_Division", state: {content_to_EDD_from_EPD_tableContent: jumong.subtastks, taskname: jumong.taskname, projectname: this.props.projectname} }}>
-                                                <icon>div </icon>
+                                                <MdArrowDropDown className="icons"/>
                                               </Link>
-                                              <icon onClick={({outerIndex})=> this.handleExpansion({outerIndex})}>div </icon>
-                                            {jumong.taskname}{outerIndex}</li>
+                                              <MdTouchApp className="icons" onClick={({outerIndex})=> this.handleExpansion({outerIndex})}/>
+                                            {jumong.taskname}{/* {outerIndex} */}</li>
                                             <li className="Start" onClick={({outerIndex})=> this.handleExpansion({outerIndex})}>{jumong.startdate}</li>
                                             <li className="Due">{jumong.enddate}</li>
                                             <li className="Days">Days</li>
@@ -270,6 +271,7 @@ handleExpansion = (index) =>{
                             entireTimes={this.state.test}
                             times={jumong.times}
                             gantView={this.props.gantView}
+                            timeView={this.props.timeView}
                           />                          
                           <hr className="LWW-H-Line"></hr>
 
@@ -287,6 +289,7 @@ handleExpansion = (index) =>{
                               entireTimes={this.state.test}
                               times={boy.times}
                               gantView={this.props.gantView}
+                              timeView={this.props.timeView}
                               taskIndex={{outerIndex}}
                               subtaskIndex={subtaskIndex}
                             />
