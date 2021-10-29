@@ -1,8 +1,9 @@
 
-let url ="http://localhost:3000"
+//let url ="http://localhost:3000"
+let url ="https://hafeez-schedule-app.herokuapp.com" 
 
 export const getProjects = async (options = {}) => {
-  const { timeout = 8000 } = options
+  const { timeout = 10000 } = options
 
   const controller = new AbortController();
   const id = setTimeout(()=> controller.abort(), timeout)

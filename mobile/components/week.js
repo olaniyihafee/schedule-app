@@ -18,6 +18,7 @@ const Tab = createBottomTabNavigator();
   
     useEffect(() =>{
       //console.log('the Day: '+Mon)
+      console.log('It doesnt crash in weeks: ')
 
       },
       reOrderBasedOnList()
@@ -40,7 +41,7 @@ const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator initialRouteName={ps[0]}
      
-        tabBarOptions={{
+        screenOptions={{
           activeTintColor: 'red',
           inactiveTintColor: 'gray',
         }}>

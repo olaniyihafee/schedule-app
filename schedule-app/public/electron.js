@@ -1,30 +1,30 @@
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const { app, BrowserWindow } = electron;
 const path = require('path');
-const url = require('url');
 const isDev = require('electron-is-dev');
-
-let mainWindow;
-
-//let { fork } = require('child_process')
-//let serverProcess = fork(_dirname + '/server.js')
-
-function createWindow() {
-	mainWindow = new BrowserWindow({width: 900, height: 680});
-	mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, 'index.html')}`).on('uncaughtException', function (error){ console.log(error)});;
-	mainWindow.on('closed', () => mainWindow = null);
-}
-
+let mainWindow = null;
 app.on('ready', createWindow);
-
-app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') {
-		app.quit();
-	}
+app.on('window-all-closed', function () {
+if (process.platform !== 'darwin') {
+app.quit()
+}
 });
-app.on('activate', () => {
-	if (mainWindow === null) {
-	createWindow();
-	}
+app.on('activate', function () {
+if (mainWindow === null) {
+createWindow()
+}
 });
+function createWindow() {
+mainWindow = new BrowserWindow({
+width: 1024,
+height: 1024,
+title: "Schedule-App"
+});
+mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+mainWindow.on('closed', function () {
+mainWindow = null
+})
+mainWindow.on('page-title-updated', function (e) {
+e.preventDefault()
+});
+}

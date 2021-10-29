@@ -1,7 +1,7 @@
 import { TabRouter } from '@react-navigation/routers';
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import { UserContext } from '../otherFunctions/userContext'
 import Task from './task'
 
@@ -11,41 +11,30 @@ const Day = ({ navigation, route }) => {
     //const value = useContext(UserContext)
 
     useEffect(() =>{
-        //console.log('day: '+day)
+        console.log('day: '+day)
+      console.log('It doesnt crash in days: ')
       },[]) 
 
-      const ItemView = ({ item }) => {
-        return (
-          
-          // Flat List Item   
+      const ItemView = ({ item }) =>{
+        return ( 
           <View style={{
-            flex: 1,
-            marginTop: '10px',
-            marginLeft: '10px',
-            marginRight: '10px',
-            backgroundColor: '#fff',
-            //backgroundColor: 'red'
-          }}>     
-            <Task task={item[2]} subtask={item[1]} time={item[0]}/> 
-          </View> 
+            margin: 10,
+            backgroundColor: "#ffff"
+          }}>
+            <Task task= {item != undefined ?item[2]:null} subtask={item != undefined ?item[0]:null} time={item != undefined ?item[1]:null}/>
+          </View>
         );
       };  
 
     return (
-      <View>
-        <View style={{flex: 1}}>                
+        <View style={{flex: 1}}>
           <FlatList 
             style={{maxHeight: windowHeight}}
             data={day}
             keyExtractor={(item, index) => index.toString()}
             renderItem={ItemView}
-            /*numColumns={4}
-              onEndReachedThreshold={0.5}
-            onEndReached={info => {
-              loadMoreResults()
-            }}  */
-          />
-        </View>
+            
+          /> 
       {/* <View style={styles.container}>
               <Text>Juniper lee: {day[0][0]}</Text>
               
@@ -56,11 +45,11 @@ const Day = ({ navigation, route }) => {
   }
   export default Day
 
-  const styles = StyleSheet.create({
+  /* const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
     },
-  });
+  }); */

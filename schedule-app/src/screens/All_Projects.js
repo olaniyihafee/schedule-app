@@ -17,7 +17,6 @@ function All_Projects() {
   const [ data2ToPopUP, setData2ToPopUp ] = useState([])
 
   useEffect( async () => {
-
     let resultFromServer = []
 
    // setTimeout(async () => {
@@ -44,24 +43,28 @@ function All_Projects() {
 
       let backedup = localStorage.getItem('backUpToPushOnline') 
 
-      if(backedup !== null){
-        
-        let backedup = []
-        backedup = localStorage.getItem('backUpToPushOnline') 
-        let backedupParse = JSON.parse(backedup)
+      try{
+        if(backedup !== null){
+          
+          let backedup = []
+          backedup = localStorage.getItem('backUpToPushOnline') 
+          let backedupParse = JSON.parse(backedup)
 
-        let placeholder
-        backedupParse.forEach((backupContent, index)=>{
-          if(backupContent.type == 'newProjectWithoutTime'){
-            placeholder.push(backupContent.body) 
-          }
-          else{
-            
-          }
-          let placeholder2 = projects
-          [placeholder2].concat(placeholder)
-          setProjects(projects => [].concat(placeholder2))
-        })
+          let placeholder
+          backedupParse.forEach((backupContent, index)=>{
+            if(backupContent.type == 'newProjectWithoutTime'){
+              placeholder.push(backupContent.body) 
+            }
+            else{
+              
+            }
+            let placeholder2 = projects
+            [placeholder2].concat(placeholder)
+            setProjects(projects => [].concat(placeholder2))
+          })
+        }
+      }catch(error){
+        console.log(error)
       }
     }
 

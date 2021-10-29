@@ -123,7 +123,7 @@ class Each_Project_Division extends React.Component {
         this.setState({ progressMsgs: 'Project Saved'})
       }
       else{
-        placeInLocalBackUp(this.state.test, 'unsavedOnlineProject') //backs it up before user sets all the times
+        placeInLocalBackUp(this.props.history.location.state.entireProject, 'newProjectWithoutTime') //backs it up before user sets all the times
         this.setState({ progressMsgs: 'Saved in Backup'})
         setTimeout(() => this.setState({ progressMsgs: ''}), 1000)
         

@@ -1,24 +1,26 @@
 import { TabRouter } from '@react-navigation/routers';
 import { StatusBar } from 'expo-status-bar';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { UserContext } from '../otherFunctions/userContext'
 
 const Task = (props) => {
 
-    /* useEffect(() =>{
-        this.props.navigation.navigate('MainNavRoute', { jumong: 'house of cards', jumbo: 'house of lies'})
-      }) */
+    useEffect(() =>{
+        //this.props.navigation.navigate('MainNavRoute', { jumong: 'house of cards', jumbo: 'house of lies'})
+        
+      console.log('It doesnt crash in task: '+JSON.stringify(props))
+      }) 
 
     return (
-      <View /* style={styles.container} */>
+      <View style={styles.container}>
 
-        <View /* style={styles.taskContainer} */>
-          <Text /* style={styles.task} */>{props.task}</Text>
+        <View style={styles.taskContainer}>
+          <Text style={styles.task}>{props.task}</Text>
         </View>
 
-        <View /* style={styles.subtaskContainer} */>
-          <Text /* style={styles.subtask} */>{props.subtask}</Text><Text /* style={styles.time} */>{props.time}</Text>
+        <View style={styles.subtaskContainer}>
+          <Text style={styles.subtask}>{props.subtask} </Text><Text style={styles.time}>{props.time}</Text>
         </View>
 
       </View>
@@ -26,14 +28,14 @@ const Task = (props) => {
   }
   export default Task
 
-  const styles = StyleSheet.create({
+   const styles = StyleSheet.create({
     container: {
       flex: 1,
       flexDirection: 'column',
       backgroundColor: '#fff',
       alignItems: 'flex-start',
       justifyContent: 'center',
-      margin: '2px',      
+      margin: 2,      
       //backgroundColor: 'purple',
     },
     taskContainer: {
@@ -42,12 +44,12 @@ const Task = (props) => {
       backgroundColor: '#fff',
       alignItems: 'flex-end',
       justifyContent: 'flex-end',
-      margin: '2px'
+      margin: 2
     },
     task: {
       fontSize: 18,
       fontWeight: 'bold',
-      padding: '4px'
+      padding: 4
     },
     subtaskContainer: {
       flex: 1,
@@ -56,7 +58,7 @@ const Task = (props) => {
       //backgroundColor: 'blue',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: '2px'
+      margin: 2
     },
     subtask: {
       flex: 3,
@@ -64,15 +66,15 @@ const Task = (props) => {
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: '2px',
-      padding: '4px'
+      margin: 2,
+      padding: 4
     },
     time: {
       flex: 1,
       //backgroundColor: 'orange',
       alignItems: 'flex-end',
       justifyContent: 'center',
-      margin: '2px',
-      padding: '4px'
-    },
-  });
+      margin: 2,
+      padding: 4
+    },/**/
+  }); 
