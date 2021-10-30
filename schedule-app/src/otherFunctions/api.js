@@ -1,4 +1,5 @@
-
+/* const electron = require('electron')
+const net = electron.remote.net */
 //let url ="http://localhost:3000"
 let url ="https://hafeez-schedule-app.herokuapp.com" 
 
@@ -17,7 +18,7 @@ export const getProjects = async (options = {}) => {
                 });
                 clearTimeout(id)
       return read.json() 
-}
+} 
 
 export const saveProject = async (body, options = {}) => {  
   const { timeout = 8000 } = options
@@ -36,6 +37,19 @@ export const saveProject = async (body, options = {}) => {
     clearTimeout(id)
     return read.json() 
 }
+
+/* export const getProjects = async (body, options = {}) => { 
+  var read = await fetch(url + '/projects',{
+      "method": 'GET',
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": JSON.stringify(body),
+      rejectUnauthorized: false,
+    }
+     );
+    return read.json() 
+} */
 
 export const saveTask = async (body) => {
   fetch(url + '/task',{
